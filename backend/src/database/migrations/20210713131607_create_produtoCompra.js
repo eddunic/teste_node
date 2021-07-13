@@ -1,0 +1,17 @@
+exports.up = function(knex) {
+    return knex.schema.createTable('produtoCompra', function(table) {
+        table.increments();
+        table.integer('quantidade').notNullable();
+
+        //foreign
+        table.integer('compra_id').notNullable();
+        table.foreign('compra_id').references('id').inTable('compras');
+
+        table.integer('produto_id').notNullable();
+        table.foreign('produto_id').references('id').inTable('produtos');
+    })  
+};
+
+exports.down = function(knex) {
+    return knex.schema.dropTable('produtoCompra');
+};
