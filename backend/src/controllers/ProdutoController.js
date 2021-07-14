@@ -19,7 +19,7 @@ module.exports = {
     },
 
     async create(request, response) {
-        const {nome, descricao, preco, data_criacao, data_atualizacao} = request.body;
+        const {nome, descricao, preco, data_criacao} = request.body;
 
         const id = crypto.randomInt(2147483647);
     
@@ -29,7 +29,6 @@ module.exports = {
             descricao,
             preco,
             data_criacao,
-            data_atualizacao,
         });
     
         return response.json({id});

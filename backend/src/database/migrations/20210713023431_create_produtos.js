@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.string('descricao').notNullable();
         table.double('preco').notNullable();
         table.date('data_criacao').notNullable();
-        table.date('data_atualizacao').notNullable();
+        table.date('data_atualizacao');
     }); 
 };
 
