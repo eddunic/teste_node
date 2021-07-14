@@ -1,33 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import api from '../../services/api';
 
 export default function ListarCompras() {
+    const [compras, setCompras] = useState([]);
+    let history = useHistory();
+
+    useEffect(() => {
+        api.get('compras', {}).then(response => {
+            setCompras(response.data);
+        });
+    }, []);
+
     return (
-        <div class="text-center container">
-            <br/><br/><br/>
+        <div className="text-center container">
+            <br /><br /><br />
             <h1>Compras</h1>
-            <br/><br/><br/>
+            <br /><br /><br />
             <ul>
-                <li>
-                    <h3>Compra1</h3>
-                    <br/>
-                    <Link to="/listarcompra">
-                        <button class="btn btn-primary">Ver</button>{' '}
-                    </Link>
-                </li>
-                <br/><br/><br/>
-                <li>
-                    <h3>Compra1</h3>
-                    <br/>
-                    <button class="btn btn-primary">Ver</button>{' '}
-                </li>
-                <br/><br/><br/>
-                <li>
-                    <h3>Compra1</h3>
-                    <br/>
-                    <button class="btn btn-primary">Ver</button>{' '}
-                </li>
-                <br/><br/><br/>
+                {compras.map(compra => (
+                    <li key={compra.id}>
+                        <h3>{compra.total}</h3>
+                        <br />
+                        <Link to={{ pathname: "/listarcompra/" + compra.id, state: { compra: compra } }} className="btn btn-primary"> Ver compra</Link>
+                        <br /><br /><br /><br />
+                    </li>
+                ))}
             </ul>
         </div>
     );

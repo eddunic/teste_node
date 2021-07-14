@@ -13,7 +13,7 @@ export default function ListarProdutos() {
     }, []);
 
     return (
-        <div class="text-center container">
+        <div className="text-center container">
             <br /><br /><br />
             <h1>Produtos</h1>
             <br /><br /><br />
@@ -22,10 +22,8 @@ export default function ListarProdutos() {
                     <li key={produto.id}>
                         <h3>{produto.nome}</h3>
                         <br />
-                        {/* <button onClick={() => history.push({ pathname: `/listarproduto/${produto.id}`, state: { produto: produto } })} class="btn btn-primary">Ver</button>{' '}
-                        se não der certo na página que tá passando tenta: */}
-
-                        <Link to={{ pathname: "/listaproduto/" + produto.id, state: { produto: produto } }} class="btn btn-primary"> Ver produto</Link>
+                        <Link to={{ pathname: "/listarproduto/" + produto.id, state: { produto: produto } }} className="btn btn-primary"> Ver produto</Link>
+                        <br /><br /><br /><br />
                     </li>
                 ))}
             </ul>

@@ -3,9 +3,7 @@ exports.up = function(knex) {
         table.increments();
         table.integer('quantidade').notNullable();
 
-        //foreign
-        table.integer('compra_id').notNullable();
-        table.foreign('compra_id').references('id').inTable('compras');
+        table.integer('compra_id');
 
         table.integer('produto_id').notNullable();
         table.foreign('produto_id').references('id').inTable('produtos');

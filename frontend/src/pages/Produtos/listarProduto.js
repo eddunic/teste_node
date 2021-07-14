@@ -3,43 +3,35 @@ import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
 export default function ListarProduto(props) {
-     const {produto} = props
+    const produto = props.location.state.produto
 
-    //criar delete
+    async function handleDelete(id) {
+        await api.delete(`produtos/${id}`)
 
-    // async function handleEnviaIdPagina(id) {
-    //         // await api.delete(`produtos/${id}`)
-    // }
-
-    useEffect(() => {
-        api.get('produtos', {}).then(response => {
-            console.log(produto.nome)
-        });
-    }, []);
+        alert('Produto excluído com sucesso');
+    }
 
     return (
-        <div class="text-center container">
+        <div className="text-center container">
             <br /><br /><br />
             <h1>Detalhes do produto</h1>
             <br /><br /><br />
             <ul>
                 <li>
-                    <h3>Nome: {props.nome}</h3>
+                    <h3>Nome: {produto.nome}</h3>
                     <br />
-                    <h3>Descrição: {props.descricao}</h3>
+                    <h3>Descrição: {produto.descricao}</h3>
                     <br />
-                    <h3>Preço: {props.preco}</h3>
+                    <h3>Preço: {produto.preco}</h3>
                     <br />
-                    <h3>Data criação: {props.data_criacao}</h3>
+                    <h3>Data criação: {produto.data_criacao}</h3>
                     <br />
-                    <h3>Data atualização: {props.data_atualizacao}</h3>
+                    <h3>Data atualização: {produto.data_atualizacao}</h3>
                     <br />
                 </li>
                 <br /><br />
-                <Link to="/editarproduto">
-                    <button class="btn btn-primary">Editar</button>{' '}
-                </Link>
-                <button class="btn btn-danger">Deletar</button>{' '}
+                <Link to={{ pathname: "/editarproduto/" + produto.id, state: { produto: produto } }} className="btn btn-primary">Editar</Link>{' '}
+                <button onClick={() => handleDelete(produto.id)} className="btn btn-danger">Deletar</button>{' '}
                 <br /><br /><br />
             </ul>
         </div >
