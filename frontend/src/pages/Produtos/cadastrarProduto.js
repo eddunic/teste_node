@@ -19,7 +19,7 @@ export default function CadastrarProduto() {
         };
 
         try {
-            const response = await api.post('produtos', data);
+            const response = await api.post('/produtos', data);
 
             alert('Produto cadastrado com sucesso');
         }catch(err) {
