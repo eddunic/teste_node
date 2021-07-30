@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+
+    db:
+        image: mysql
+        container_name: mysql-container
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        volumes:
+            - ./backend/src/database/migrations:/var/lib/mysql
+        restart: always
+    
+    backend:
+        build: "./backend"
+        container_name: backend-container
+        restart: always
+        ports:
+            - "3335:3000"
+        volumes:
+            - ./backend:/usr/app/backend
+        depends_on:
+             - db
+        entrypoint: ["npm", "start"]
+
+    frontend:
+        build: "./frontend"
+        container_name: frontend-container
+        restart: always
+        ports:
+            - "3333:3000"
+        volumes:
+            - ./frontend:/usr/app/frontend
+        entrypoint: ["npm", "start"]
